@@ -26,6 +26,8 @@ DEBARCH := all
 RPMARCH := noarch
 VERSION := $(shell ./gitversion.sh)
 
+CHECK_PACKAGES += coreutils
+
 SHARE_DIR = $(DESTDIR)/usr/share/$(PKGNAME)
 DOC_DIR = $(DESTDIR)/usr/share/doc/$(PKGNAME)
 

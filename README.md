@@ -7,6 +7,8 @@ The basic tasks are:
 - Checking all required packages are installed in order for a Makefile to run successfully ;
 - Generating a .deb and/or .rpm package from a simple "make install" rule.
 
+A comprehensive example is given in makepkg source tree itself.
+
 ## Install makepkg
 From source:
 ```
@@ -35,8 +37,11 @@ VERSION = $(shell /usr/share/makepkg/gitversion.sh)
 #DEBARCH := all
 #RPMARCH := noarch
 
-CHECK_PACKAGES_deb = # List of .deb packages required by the Makefile when run on a Debian-style distro
-CHECK_PACKAGES_rpm = # List of .rpm packages required by the Makefile when run on a RedHat-style distro
+# List of .deb packages required by the Makefile when run on a Debian-style distro
+CHECK_PACKAGES_deb += <Required DEB package list>
+
+# List of .rpm packages required by the Makefile when run on a RedHat-style distro
+CHECK_PACKAGES_rpm += <Required RPM package list>
 
 all: check
 	<Put your build rules here>
