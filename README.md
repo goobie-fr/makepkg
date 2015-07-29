@@ -7,7 +7,7 @@ The basic tasks are:
 - Checking all required packages are installed in order for a Makefile to run successfully ;
 - Generating a .deb and/or .rpm package from a simple "make install" rule.
 
-A comprehensive example is given in makepkg source tree itself.
+A comprehensive example is given in the makepkg Makefile itself.
 
 ## Install makepkg
 From source:
