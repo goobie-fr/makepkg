@@ -1,6 +1,12 @@
 # makepkg
 A set of tools and scripts for building and checking Debian/RedHat packages from Makefiles.
 
+## Overview
+makepkg provides some scripts and Makefile rules to support .deb/.rpm packaging.
+The basic tasks are :
+- Checking all required packages are installed in order for a Makefile to run successfully ;
+- Generating a .deb and/or .rpm package from a simple "make install" rule.
+
 ## Install makepkg
 From source:
 ```
@@ -26,7 +32,10 @@ PKGNAME := <MyPackage>
 #DEBARCH := all
 #RPMARCH := noarch
 
-all:
+CHECK_PACKAGES_deb = # List of .deb packages required by the Makefile when run on a Debian-style distro
+CHECK_PACKAGES_rpm = # List of .rpm packages required by the Makefile when run on a RedHat-style distro
+
+all: check
 	<Put your build rules here>
 
 # Include makepkg rules
@@ -40,11 +49,45 @@ install:
 ```
 
 ## Generate a.deb or .rpm package
-Generate a Debian package:
+### Write package specification file.
+
+control.in for Debian-style packages:
+```
+Package: @NAME@
+Priority: optional
+Version: @VERSION@
+Architecture: @ARCH@
+Maintainer: <Your name>
+Section: <Package category, e.g. devel>
+Depends: <List of package dependencies (comma-separated items)>
+Description: <Package description>
+```
+
+spec.in for RedHat-style packages:
+```
+Name:     @NAME@
+Version:  @VERSION@
+Release:  @RELEASE@
+Summary:  <A short description>
+Packager: <Your name>
+Requires: <List of package dependencies (space-separated items)>
+Group:    <Package category, e.g. Development/Tools>
+License:  <Your Lincense, e.g. GPL>
+URL:      <Your web site URL>
+
+%description
+<Package description>
+
+%files -f RPM.files
+%defattr(-,root,root,-)
+```
+
+### Generate package
+Debian-style package:
 ```
 $ make deb
 ```
-Generate a RedHat package:
+RedHat-style package:
 ```
 $ make rpm
 ```
