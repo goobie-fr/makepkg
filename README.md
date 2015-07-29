@@ -3,7 +3,7 @@ A set of tools and scripts for building and checking Debian/RedHat packages from
 
 ## Overview
 makepkg provides some scripts and Makefile rules to support .deb/.rpm packaging.
-The basic tasks are :
+The basic tasks are:
 - Checking all required packages are installed in order for a Makefile to run successfully ;
 - Generating a .deb and/or .rpm package from a simple "make install" rule.
 
@@ -25,6 +25,9 @@ Typical Makefile pattern:
 # Specify the package base name in variable PKGNAME,
 # without version id nor architecture suffix.
 PKGNAME := <MyPackage>
+
+# Let makepkg guess the package version from the latest GIT tag
+VERSION = $(shell /usr/share/makepkg/gitversion.sh)
 
 # Uncomment the 2 follolwing lines if the package is architecture-independent,
 # i.e. if it does not contain natively executable code.
