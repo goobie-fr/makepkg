@@ -23,7 +23,9 @@
 
 ifdef PKGNAME  # Hide packaging rules if package name not defined
 
-VERSION ?= 0
+ifeq ($(VERSION),)
+VERSION := 0
+endif
 RPMARCH ?= $(shell arch)
 DEBARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
@@ -83,10 +85,11 @@ deb: check_tools check_vars install
 	mkdir -p $(DESTDIR)/DEBIAN
 	for file in preinst postinst prerm postrm; do \
 		[ -f $$file ] && install -m 755 $$file $(DESTDIR)/DEBIAN/; done; \
+	grep -v '^#' control.in | \
 	sed -e 's/@NAME@/$(PKGNAME)/' \
 	    -e 's/@ARCH@/$(DEBARCH)/' \
 	    -e 's/@VERSION@/$(VERSION)-$(BUILDDATE)/' \
-	    control.in > $(DESTDIR)/DEBIAN/control
+	    > $(DESTDIR)/DEBIAN/control
 	fakeroot dpkg-deb --build $(DESTDIR) $(PKGDIR)/$(PKGNAME)_$(VERSION)-$(BUILDDATE)_$(DEBARCH).deb
 
 else
