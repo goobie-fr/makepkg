@@ -8,14 +8,14 @@ $ sudo make DESTDIR= install
 ```
 
 By generating a package:
-```Makefile
+```
 $ make deb
 $ sudo dpkg -i out/makepkg_*.deb
 ```
 
 ## Write a Makefile
 Typical Makefile pattern:
-```
+```Makefile
 # Specify the package base name in variable PKGNAME,
 # without version id nor architecture suffix.
 PKGNAME := <MyPackage>
