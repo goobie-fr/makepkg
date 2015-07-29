@@ -27,13 +27,15 @@ RPMARCH := noarch
 VERSION := $(shell ./gitversion.sh)
 
 SHARE_DIR = $(DESTDIR)/usr/share/$(PKGNAME)
+DOC_DIR = $(DESTDIR)/usr/share/doc/$(PKGNAME)
 
 all: deb
 
 install:
-	mkdir -p $(SHARE_DIR)
+	mkdir -p $(SHARE_DIR) $(DOC_DIR)
 	install -m 0755 $(wildcard *.sh) $(SHARE_DIR)
 	install -m 0644 $(wildcard *.mk) $(SHARE_DIR)
+	install -m 0644 README.md AUTHORS $(DOC_DIR)
 
 clean:
 	rm -rf $(DESTDIR) *~
