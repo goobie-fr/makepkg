@@ -1,19 +1,19 @@
 # makepkg
 A set of tools and scripts for building and checking Debian/RedHat packages from Makefiles.
 
-<h2>Installing makepkg</h2>
+## Install makepkg
 From source:
 ```
 $ sudo make DESTDIR= install
 ```
 
 By generating a package:
-```
+```Makefile
 $ make deb
 $ sudo dpkg -i out/makepkg_*.deb
 ```
 
-<h2>Writing a Makefile</h2>
+## Write a Makefile
 Typical Makefile pattern:
 ```
 # Specify the package base name in variable PKGNAME,
@@ -39,7 +39,7 @@ install:
 	<Copy files to $(DESTDIR)>
 ```
 
-<h2>Generate a.deb or .rpm package</h2>
+## Generate a.deb or .rpm package
 Generate a Debian package:
 ```
 $ make deb
