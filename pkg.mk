@@ -83,7 +83,7 @@ rpm: check_tools check_vars install
 BUILDDATE := $(shell date +%y%m%d)
 deb: check_tools check_vars install
 	mkdir -p $(DESTDIR)/DEBIAN
-	for file in preinst postinst prerm postrm; do \
+	for file in preinst postinst prerm postrm rules conffiles; do \
 		[ -f $$file ] && install -m 755 $$file $(DESTDIR)/DEBIAN/; done; \
 	grep -v '^#' control.in | \
 	sed -e 's/@NAME@/$(PKGNAME)/' \
